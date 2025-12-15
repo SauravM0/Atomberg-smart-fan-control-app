@@ -1,36 +1,78 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Atomberg Fan Control Application
 
-## Getting Started
+## Overview
+This is a production-ready web application for controlling Atomberg smart fans. It utilizes the official Atomberg Developer API to authenticate users, discover devices, and control fan speed and power states. The application is built with Next.js 16 (App Router) and features a responsive, modern UI styled with Tailwind CSS.
 
-First, run the development server:
+## Architecture
+- **Frontend**: Next.js (React 19), Tailwind CSS, Lucide React (Icons).
+- **Backend (BFF)**: Next.js API Routes act as a "Backend for Frontend" to securely proxy requests to the Atomberg API, handling token storage and refreshing via `iron-session`.
+- **Authentication**: Usage of Atomberg's API Key & Refresh Token mechanism to exchange for short-lived Access Tokens.
+- **State Management**: Server-side session management for secure token handling; Client-side optimistic UI updates for responsive controls.
 
+## Setup & Installation
+
+### Prerequisites
+- Node.js (v18 or higher)
+- npm or yarn
+- An Atomberg Developer Account with a valid API Key and Refresh Token.
+
+### Installation
+1. Clone the repository:
+   ```bash
+   git clone <repository-url>
+   cd atomberg-app
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Configure Environment Variables:
+   Create a `.env.local` file in the root directory (do not commit this file).
+   ```env
+   # .env.local
+   ATOMBERG_API_KEY=your_api_key_here
+   ATOMBERG_REFRESH_TOKEN=your_refresh_token_here
+   IRON_SESSION_PASSWORD=complex_password_at_least_32_characters_long
+   NODE_ENV=production
+   ```
+   > **Note**: `IRON_SESSION_PASSWORD` must be at least 32 characters long.
+
+## Running the Application
+
+### Development Mode
+To run the application locally with hot-reloading:
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+```
+Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+### Production Build
+To create an optimized production build:
+```bash
+npm run build
+npm start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Usage
+1. **Login**: Navigate to the home page. If `ATOMBERG_API_KEY` and `ATOMBERG_REFRESH_TOKEN` are configured in `.env.local`, you may auto-login or use the credentials form if implemented.
+2. **Dashboard**: View all your connected Atomberg fans.
+3. **Control**:
+   - Toggle the **Power** button to turn the fan On/Off.
+   - Use the **Slider** or **Buttons** to change the fan speed (0-5).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Limitations & Assumptions
+- **Official Hardware Required**: The application strictly communicates with the Atomberg API. You must have actual compatible Atomberg devices linked to your developer account. Mock data has been removed for production safety.
+- **Token Expiry**: The application handles access token refreshing automatically. If the Refresh Token itself expires (usually long-lived), you must update it in `.env.local`.
+- **Network**: Requires an active internet connection to communicate with Atomberg servers.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Troubleshooting
+- **Build Errors**: Ensure `eslint` passes. Run `npm run lint`.
+- **Auth Errors**: Verify your API Key and Refresh Token in `.env.local`. Ensure they are not expired.
+- **Device Not Found**: Ensure devices are online and linked to your Atomberg account.
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Submission Checklist
+- [x] End-to-End Authentication
+- [x] Device Control (Speed/Power)
+- [x] Production Build Optimized
+- [x] No Debug Logs
+- [x] Secure Session Handling
