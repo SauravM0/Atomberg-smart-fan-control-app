@@ -9,6 +9,9 @@ This is a production-ready web application for controlling Atomberg smart fans. 
 - **Authentication**: Usage of Atomberg's API Key & Refresh Token mechanism to exchange for short-lived Access Tokens.
 - **State Management**: Server-side session management for secure token handling; Client-side optimistic UI updates for responsive controls.
 
+## Hosted / Website
+https://atomberg-smart-fan-control-app.vercel.app/login
+
 ## Setup & Installation
 
 ### Prerequisites
