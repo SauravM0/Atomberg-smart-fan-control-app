@@ -1,5 +1,8 @@
 # Atomberg Fan Control Application
 
+## Hosted / Website
+https://atomberg-smart-fan-control-app.vercel.app/login
+
 ## Overview
 This is a production-ready web application for controlling Atomberg smart fans. It utilizes the official Atomberg Developer API to authenticate users, discover devices, and control fan speed and power states. The application is built with Next.js 16 (App Router) and features a responsive, modern UI styled with Tailwind CSS.
 
@@ -9,8 +12,6 @@ This is a production-ready web application for controlling Atomberg smart fans. 
 - **Authentication**: Usage of Atomberg's API Key & Refresh Token mechanism to exchange for short-lived Access Tokens.
 - **State Management**: Server-side session management for secure token handling; Client-side optimistic UI updates for responsive controls.
 
-## Hosted / Website
-https://atomberg-smart-fan-control-app.vercel.app/login
 
 ## Setup & Installation
 
